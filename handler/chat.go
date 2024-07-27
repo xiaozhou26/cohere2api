@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"strings"
+	"time"
 
 	"cohere/model"
 	"cohere/utils"
@@ -52,10 +53,34 @@ func ChatCompletions(c *gin.Context) {
 		c.Header("Content-Type", "text/event-stream; charset=UTF-8")
 		utils.HandleStreamResponse(resp.Body, c.Writer, data.Model)
 	} else {
-		var result map[string]interface{}
-		if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
+		var chatResponse map[string]interface{}
+		if err := json.NewDecoder(resp.Body).Decode(&chatResponse); err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
+		}
+		created := time.Now().Unix()
+		result := gin.H{
+			"id":      "chatcmpl-test",
+			"object":  "chat.completion",
+			"created": created,
+			"model":   body.Model,
+			"choices": []gin.H{
+				{
+					"index": 0,
+					"message": gin.H{
+						"role":    "assistant",
+						"content": chatResponse["text"],
+					},
+					"logprobs":      nil,
+					"finish_reason": "stop",
+				},
+			},
+			"usage": gin.H{
+				"prompt_tokens":     0,
+				"completion_tokens": 0,
+				"total_tokens":      0,
+			},
+			"system_fingerprint": nil,
 		}
 		c.JSON(http.StatusOK, result)
 	}
