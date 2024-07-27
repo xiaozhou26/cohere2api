@@ -3,7 +3,7 @@ package api
 import (
 	"net/http"
 
-	"mychatapp/initialize"
+	"cohere/initialize"
 
 	"github.com/gin-gonic/gin"
 )
