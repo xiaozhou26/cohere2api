@@ -1,4 +1,8 @@
 # cohere2api
+
+### Vercel部署
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fxiaozhou26%2Fcohere2api&project-name=cohere2api&repository-name=cohere2api)
+
 Docker部署
 
 ```bash
