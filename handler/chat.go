@@ -75,12 +75,6 @@ func ChatCompletions(c *gin.Context) {
 					"finish_reason": "stop",
 				},
 			},
-			"usage": gin.H{
-				"prompt_tokens":     0,
-				"completion_tokens": 0,
-				"total_tokens":      0,
-			},
-			"system_fingerprint": nil,
 		}
 		c.JSON(http.StatusOK, result)
 	}
