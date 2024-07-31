@@ -7,7 +7,7 @@ Docker部署
 
 ```bash
 docker run -d \
-  --name aurora \
+  --name cohere2api \
   -p 8080:8080 \
   ghcr.io/xiaozhou26/cohere2api:latest
 ```
