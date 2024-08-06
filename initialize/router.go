@@ -12,6 +12,7 @@ func InitRouter() *gin.Engine {
 	r.Use(handler.CORSMiddleware())
 
 	r.POST("/v1/chat/completions", handler.ChatCompletions)
+	r.GET("/v1/models", handler.GetModelsHandler)
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "Hello, world!",
